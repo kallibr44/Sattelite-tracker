@@ -11,7 +11,7 @@ TO DO list:
 3. Show simple location with normal interface (ready)
 4. Create DB for all TLE of NOAA
 5. Menu to choose the satellite
-6. add API for work with otheer projects (e.g. antenna dish auto-track)
+6. add API for work with other projects (e.g. antenna dish auto-track)
 7. ???
 ...
 
