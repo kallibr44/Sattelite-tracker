@@ -15,3 +15,6 @@ TO DO list:
 7. ???
 ...
 
+Known bugs:
+1. If we will update DB second time, all data will clone himself into DB. (Maybe crash DB)
+2. track just for NOAA-19 (Working on it)
