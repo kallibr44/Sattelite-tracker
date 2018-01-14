@@ -14,44 +14,49 @@ tle = """NOAA 19 [+]
 2 33591  99.1222 347.0149 0014775  48.2167 312.0264 14.12245172459856"""
 
 def update():
-  os.system("clear")
-  print "Updating..."
-  time.sleep(1)
-  os.system("wget http://www.celestrak.com/NORAD/elements/noaa.txt")
-  os.system("clear")
-  print "Completed! \n"
-  time.sleep(1)
-  db.update_db()
-  time.sleep(1)
-  os.system("rm noaa*")
-  os.system("clear")
-  return
+ db.download_update()
 
-def monitor():
- while True:
+def monitor(tle):
+ #while True:
   raw_data = predict.observe(tle, qth)
   data=json.dumps(raw_data)
+  p = predict.transits(tle, qth)
+  for i in range(1,10):
+	transit = p.next()
+	print("%f\t%f\t%f" % (transit.start, transit.duration(), transit.peak()['elevation']))
+  """
+  raw_pred = predict.transits(tle, qth)
+  pred = raw_pred.next()
   print "-------------------------------------------------------\n"
   print "Current sattelite: " + str(json.loads(data)['name']) + "\n"
   print "Latitude: " + str(json.loads(data)['latitude']) + "                          \n"
   print "Longitude: " + str(json.loads(data)['longitude']) + "                       \n"
+  print "Next Transit: " + str(pred.start()\60\60\24)
+  print "Transit duration: " + str(pred.duration()) + "\n"
+  print "Transit Peak: " + str(pred.peak()['elevation']) + "\n"
   print "-------------------------------------------------------\n"
   time.sleep(0.5)
-  os.system("clear")
+  os.system("clear") """
   
 if __name__=='__main__':
- print "-------------------------------------------------------\n"
- print "               Satelite Tracker (Beta)                 \n"
- print "                                                       \n"
- print "  1. Update TLE                                        \n"
- print "  2. Start Track                                       \n"
- print "-------------------------------------------------------\n"
- choose = input("ST@local: ")
- if choose == 1:
-  update()
- elif choose == 2:
-  #sat = input("Name of satelite: ")
-  print "Start locating NOAA19"
-  time.sleep(2)
-  monitor()
- 
+ while True:
+  print "-------------------------------------------------------\n"
+  print "               Satelite Tracker (Beta)                 \n"
+  print "                                                       \n"
+  print "  1. Update TLE                                        \n"
+  print "  2. Count DB                                          \n"
+  print "  3. Start Track                                       \n"
+  print "-------------------------------------------------------\n"
+  choose = input("ST@local: ")
+  if choose == 1:
+   update()
+  elif choose == 3:
+   sat = input("Name of satelite: ")
+   tle = db.start_track(sat)
+   print "--------------------------------------\n"
+   print "TLE Received! Starting track..."
+   print tle
+   time.sleep(2)
+   monitor(tle)
+  elif choose == 2:
+   db.sat_find()
