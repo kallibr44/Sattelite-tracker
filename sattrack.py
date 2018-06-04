@@ -17,9 +17,9 @@ tle = """NOAA 19 [+]
 
 def init():
  req = requests.get("https://raw.githubusercontent.com/kallibr44/Sattelite-tracker/master/version")
- raw = req.content
- if (int(raw) != int(vers)):
-   newer = 1
+ rraw = req.content
+ if (int(rraw) != int(vers)):
+    newer = 1
    
 def version():
  chk_var = 0
@@ -74,7 +74,6 @@ def monitor(tle):
   os.system("clear")
   
 if __name__=='__main__':
- init()
  while True:
   print "-------------------------------------------------------\n"
   print "               Satelite Tracker (Beta)                 \n"
