@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import predict
@@ -6,6 +5,7 @@ import json
 import os
 import time
 import db
+import datetime
 
 os.system("clear")
 qth = (56.5, 84.96667, 98)
@@ -17,32 +17,28 @@ def update():
  db.download_update()
 
 def monitor(tle):
- #while True:
+ while True:
   raw_data = predict.observe(tle, qth)
   data=json.dumps(raw_data)
   p = predict.transits(tle, qth)
-  for i in range(1,10):
-	transit = p.next()
-	print("%f\t%f\t%f" % (transit.start, transit.duration(), transit.peak()['elevation']))
-  """
-  raw_pred = predict.transits(tle, qth)
-  pred = raw_pred.next()
+  transit = p.next()
+  #print("%f\t%f\t%f" % (transit.start, transit.duration(), transit.peak()['elevation']))
   print "-------------------------------------------------------\n"
   print "Current sattelite: " + str(json.loads(data)['name']) + "\n"
   print "Latitude: " + str(json.loads(data)['latitude']) + "                          \n"
   print "Longitude: " + str(json.loads(data)['longitude']) + "                       \n"
-  print "Next Transit: " + str(pred.start()\60\60\24)
-  print "Transit duration: " + str(pred.duration()) + "\n"
-  print "Transit Peak: " + str(pred.peak()['elevation']) + "\n"
+  print "Next Transit: "+ str(datetime.datetime.fromtimestamp(int(transit.start)).strftime('%Y-%m-%d %H:%M:%S'))+"\n"
+  print "Transit duration: " + str(transit.duration()) + "\n"
+  print "Transit Peak: " + str(transit.peak()['elevation']) + "\n"
   print "-------------------------------------------------------\n"
   time.sleep(0.5)
-  os.system("clear") """
+  os.system("clear")
   
 if __name__=='__main__':
  while True:
   print "-------------------------------------------------------\n"
   print "               Satelite Tracker (Beta)                 \n"
-  print "                        New!                           \n"
+  print "                                                       \n"
   print "  1. Update TLE                                        \n"
   print "  2. Count DB                                          \n"
   print "  3. Start Track                                       \n"
