@@ -7,7 +7,7 @@ import time
 import db
 import datetime
 import requests
-
+vers = 1001
 os.system("clear")
 qth = (56.5, 84.96667, 98)
 tle = """NOAA 19 [+]
@@ -15,7 +15,6 @@ tle = """NOAA 19 [+]
 2 33591  99.1222 347.0149 0014775  48.2167 312.0264 14.12245172459856"""
 
 def version():
- version = 1001
  chk_var = 0
  try:
    print("Check internet connection...")
@@ -23,12 +22,12 @@ def version():
  except requests.exceptions.ConnectTimeout:
     print("No internet connection! skipped...")
     chk_var = 1
- if chk_var = 0:  
+ if chk_var == 0:  
   req = requests.get("https://raw.githubusercontent.com/kallibr44/Sattelite-tracker/master/version")
   raw = req.content
-  print("Your version is: " + str(version))
+  print("Your version is: " + str(vers))
   print("Server version is: " + str(raw))
-  if (int(raw) != version):
+  if (int(raw) != int(vers)):
    print("New version detected! Loading...")
    time.sleep(1)
    print("Downloading new version...")
@@ -44,7 +43,7 @@ def version():
    print("All done! Reloading...")
    os.system("python sattrack.py")
   else:
-  print("You have latest version! starting...")
+   print("You have latest version! starting...")
 
 def update():
  db.download_update()
@@ -90,3 +89,5 @@ if __name__=='__main__':
    monitor(tle)
   elif choose == 2:
    db.sat_find()
+  elif choose == 4:
+   version()
