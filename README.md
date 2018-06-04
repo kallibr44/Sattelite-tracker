@@ -8,4 +8,5 @@ Requirement:
 TO DO list:
 
 CHANGELOG:
+
 04.06.18 Added auto-updater and converting date of next sattelite tranzit
