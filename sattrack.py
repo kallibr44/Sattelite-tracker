@@ -17,8 +17,8 @@ tle = """NOAA 19 [+]
 
 def init():
  req = requests.get("https://raw.githubusercontent.com/kallibr44/Sattelite-tracker/master/version")
-  raw = req.content
-  if (int(raw) != int(vers)):
+ raw = req.content
+ if (int(raw) != int(vers)):
    newer = 1
    
 def version():
