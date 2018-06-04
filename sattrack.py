@@ -8,12 +8,19 @@ import db
 import datetime
 import requests
 vers = 1001
+newer = 0
 os.system("clear")
 qth = (56.5, 84.96667, 98)
 tle = """NOAA 19 [+]
 1 33591U 09005A   18011.92186191  .00000120  00000-0  90276-4 0  9994
 2 33591  99.1222 347.0149 0014775  48.2167 312.0264 14.12245172459856"""
 
+def init():
+ req = requests.get("https://raw.githubusercontent.com/kallibr44/Sattelite-tracker/master/version")
+  raw = req.content
+  if (int(raw) != int(vers)):
+   newer = 1
+   
 def version():
  chk_var = 0
  try:
@@ -67,10 +74,14 @@ def monitor(tle):
   os.system("clear")
   
 if __name__=='__main__':
+ init()
  while True:
   print "-------------------------------------------------------\n"
   print "               Satelite Tracker (Beta)                 \n"
-  print "                  ver. " + str(vers) + "               \n"
+  if newer == 1:
+   print "                  ver. " + str(vers) + " New version available! \n"
+  else:
+   print "                  ver. " + str(vers) + "              \n" 
   print "                                                       \n"
   print "  1. Update TLE                                        \n"
   print "  2. Count DB                                          \n"
