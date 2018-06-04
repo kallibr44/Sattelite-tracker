@@ -42,7 +42,7 @@ if __name__=='__main__':
  while True:
   print "-------------------------------------------------------\n"
   print "               Satelite Tracker (Beta)                 \n"
-  print "                                                       \n"
+  print "                        New!                           \n"
   print "  1. Update TLE                                        \n"
   print "  2. Count DB                                          \n"
   print "  3. Start Track                                       \n"
