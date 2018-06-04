@@ -16,10 +16,11 @@ tle = """NOAA 19 [+]
 2 33591  99.1222 347.0149 0014775  48.2167 312.0264 14.12245172459856"""
 
 def init():
- req = requests.get("https://raw.githubusercontent.com/kallibr44/Sattelite-tracker/master/version")
- rraw = req.content
- if (int(rraw) != int(vers)):
-    newer = 1
+ try:
+  req = requests.get("https://raw.githubusercontent.com/kallibr44/Sattelite-tracker/master/version")
+  rraw = req.content
+  if (int(rraw) != int(vers)):
+   newer = 1
    
 def version():
  chk_var = 0
@@ -74,6 +75,7 @@ def monitor(tle):
   os.system("clear")
   
 if __name__=='__main__':
+ init()
  while True:
   print "-------------------------------------------------------\n"
   print "               Satelite Tracker (Beta)                 \n"
